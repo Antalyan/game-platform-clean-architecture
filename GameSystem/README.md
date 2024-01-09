@@ -14,6 +14,13 @@ To run the web application:
 cd .\src\Web\
 dotnet watch run
 ```
+To run this app in docker, you must go to GameSystem folder and follow these steps
+
+```bash
+ docker build -f .\Dockerfile -t pv293 .
+ docker run -d -p 8080:80 pv293
+```
+This will run web app on port 80 accessible through http protocol
 
 Navigate to https://localhost:5001. The application will automatically reload if you change any of the source files.
 
