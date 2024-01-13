@@ -1,5 +1,6 @@
 ﻿using GameSystem.Application.Game.Queries.GetRules;
-using GameSystem.Application.TodoItems.Commands.CreateTodoItem;
+using GameSystem.Application.GameContext.Commands.Rules;
+using GameSystem.Application.GameContext.Queries.Rules;
 
 namespace GameSystem.Web.Endpoints;
 
@@ -12,9 +13,9 @@ public class Rules : EndpointGroupBase
             .MapPost(CreateRules);
     }
 
-    public static async Task<RulesDto?> GetRules(ISender sender, [AsParameters] GetRulesQuery query)
+    public static async Task<RulesDto?> GetRules(ISender sender, [AsParameters] GetRulesByIdQuery byIdQuery)
     {
-        return await sender.Send(query);
+        return await sender.Send(byIdQuery);
     }
     
     public static async Task<int> CreateRules(ISender sender, CreateRulesCommand command)
