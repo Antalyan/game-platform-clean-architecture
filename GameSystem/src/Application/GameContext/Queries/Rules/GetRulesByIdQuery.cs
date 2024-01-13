@@ -1,13 +1,14 @@
 ﻿using GameSystem.Application.Common.Interfaces;
+using GameSystem.Application.Game.Queries.GetRules;
 
-namespace GameSystem.Application.Game.Queries.GetRules;
+namespace GameSystem.Application.GameContext.Queries.Rules;
 
-public class GetRulesQuery : IRequest<RulesDto?>
+public class GetRulesByIdQuery : IRequest<RulesDto?>
 {
     public int RulesId { get; init; }
 }
 
-public class GetRulesQueryHandler : IRequestHandler<GetRulesQuery, RulesDto?>
+public class GetRulesQueryHandler : IRequestHandler<GetRulesByIdQuery, RulesDto?>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -18,11 +19,12 @@ public class GetRulesQueryHandler : IRequestHandler<GetRulesQuery, RulesDto?>
         _mapper = mapper;
     }
 
-    public async Task<RulesDto?> Handle(GetRulesQuery request, CancellationToken cancellationToken)
+    public async Task<RulesDto?> Handle(GetRulesByIdQuery request, CancellationToken cancellationToken)
     {
         return await _context.Rules
             .Where(x => x.Id == request.RulesId)
             .ProjectTo<RulesDto>(_mapper.ConfigurationProvider)
+            .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
     }
 }
