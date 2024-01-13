@@ -1,4 +1,5 @@
-﻿using GameSystem.Domain.Entities;
+﻿using GameSystem.Application.Game.Queries.GetRules;
+using GameSystem.Domain.Entities;
 
 namespace GameSystem.Application.Common.Models;
 
@@ -14,6 +15,7 @@ public class LookupDto
         {
             CreateMap<TodoList, LookupDto>();
             CreateMap<TodoItem, LookupDto>();
+            CreateMap<Rules, RulesDto>();
         }
     }
 }

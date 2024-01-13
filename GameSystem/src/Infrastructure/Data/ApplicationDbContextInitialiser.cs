@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using GameSystem.Domain.Constants;
 using GameSystem.Domain.Entities;
+using GameSystem.Domain.Enums;
 using GameSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -85,6 +86,19 @@ public class ApplicationDbContextInitialiser
             {
                 await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
             }
+        }
+
+        if (!_context.Rules.Any())
+        {
+            _context.Rules.Add(new Rules
+            {
+                CardsHandLimit = 1,
+                CardsDrawnInitially = 2,
+                CardsPlayedPerTurn = 3,
+                CardsDrawnPerTurn = 4,
+                WinningCondition = WinningCondition.FullHand,
+                Players = 4,
+            });
         }
 
         // Default data

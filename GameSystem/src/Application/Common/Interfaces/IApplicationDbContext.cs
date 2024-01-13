@@ -4,9 +4,11 @@ namespace GameSystem.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    DbSet<TodoList> TodoLists { get; }
+    DbSet<Rules> Rules { get; }
 
     DbSet<TodoItem> TodoItems { get; }
+    
+    DbSet<TodoList> TodoLists { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
