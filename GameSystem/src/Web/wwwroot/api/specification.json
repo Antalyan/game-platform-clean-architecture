@@ -1,11 +1,74 @@
 {
-  "x-generator": "NSwag v14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v14.0.1.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
   "openapi": "3.0.0",
   "info": {
     "title": "GameSystem API",
     "version": "1.0.0"
   },
   "paths": {
+    "/api/Rules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "GetRules",
+        "parameters": [
+          {
+            "name": "RulesId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RulesDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "CreateRules",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRulesCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TodoItems": {
       "get": {
         "tags": [
@@ -757,6 +820,80 @@
   },
   "components": {
     "schemas": {
+      "RulesDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "players": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winningCondition": {
+            "$ref": "#/components/schemas/WinningCondition"
+          },
+          "cardsDrawnPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsDrawnInitially": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsPlayedPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsHandLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WinningCondition": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "EmptyHand",
+          "FullHand"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "CreateRulesCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "players": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winningCondition": {
+            "$ref": "#/components/schemas/WinningCondition"
+          },
+          "cardsDrawnPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsDrawnInitially": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsPlayedPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsHandLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "PaginatedListOfTodoItemBriefDto": {
         "type": "object",
         "additionalProperties": false,
