@@ -1,6 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 using GameSystem.Domain.Constants;
 using GameSystem.Domain.Entities;
+using GameSystem.Domain.Entities.CardContext;
+using GameSystem.Domain.Entities.GameContext;
 using GameSystem.Domain.Enums;
 using GameSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -87,6 +89,9 @@ public class ApplicationDbContextInitialiser
                 await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
             }
         }
+        
+        // Default data
+        // Seed, if necessary
 
         if (!_context.Rules.Any())
         {
@@ -100,9 +105,34 @@ public class ApplicationDbContextInitialiser
                 Players = 4,
             });
         }
-
-        // Default data
-        // Seed, if necessary
+        
+        if (!_context.Cards.Any())
+        {
+            var numbers = Enumerable.Range(1, 10).Select(val => val.ToString()).ToList();
+            numbers.AddRange(new List<string>{"Q", "K", "J", "A"});
+            foreach (var name in numbers)
+            {
+                _context.Cards.Add(new Card
+                {
+                    Name = $"{name}",
+                    Text = "Common card",
+                    GameType = GameType.MauMau
+                });
+            }
+            _context.Cards.Add(new Card
+            {
+                Name = $"Bang",
+                Text = "BANG!",
+                GameType = GameType.SimpleBang
+            });
+            _context.Cards.Add(new Card
+            {
+                Name = $"Miss",
+                Text = "Play to avoid bang effect",
+                GameType = GameType.SimpleBang
+            });
+        }
+        
         if (!_context.TodoLists.Any())
         {
             _context.TodoLists.Add(new TodoList

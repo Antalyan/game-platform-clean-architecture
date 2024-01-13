@@ -1,4 +1,4 @@
-﻿namespace GameSystem.Web.Endpoints;
+﻿namespace GameSystem.Web.Endpoints.GameContext;
 
 public class Game
 {

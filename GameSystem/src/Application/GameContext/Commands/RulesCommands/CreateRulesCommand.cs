@@ -1,12 +1,14 @@
 ﻿using GameSystem.Domain.Enums;
 
-namespace GameSystem.Application.GameContext.Commands.Rules;
+namespace GameSystem.Application.GameContext.Commands.RulesCommands;
 
 public class CreateRulesCommand : IRequest<int>
 {
     public int Players { get; init; }
     
     public WinningCondition WinningCondition { get; init; }
+    
+    public GameType GameType { get; init; }
     
     public int CardsDrawnPerTurn { get; init; }
     

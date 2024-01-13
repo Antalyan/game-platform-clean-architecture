@@ -1,6 +1,6 @@
-﻿using GameSystem.Application.GameContext.Queries.Rules;
+﻿using GameSystem.Application.GameContext.Queries.RulesQueries;
 
-namespace GameSystem.Application.Game.Queries.GetRules;
+namespace GameSystem.Application.GameContext.Queries.GameQueries;
 
 public class GetGameByIdQueryValidator : AbstractValidator<GetRulesByIdQuery>
 {

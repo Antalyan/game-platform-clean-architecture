@@ -1,10 +1,12 @@
-﻿namespace GameSystem.Domain.Entities;
+﻿namespace GameSystem.Domain.Entities.GameContext;
 
 public class Rules: BaseAuditableEntity
 {
     public int Players { get; init; }
     
     public WinningCondition WinningCondition { get; init; }
+    
+    public GameType GameType { get; init; }
     
     public int CardsDrawnPerTurn { get; init; }
     

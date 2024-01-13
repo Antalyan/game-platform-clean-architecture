@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using GameSystem.Application.Common.Interfaces;
 using GameSystem.Domain.Entities;
+using GameSystem.Domain.Entities.CardContext;
+using GameSystem.Domain.Entities.GameContext;
 using GameSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<GameDeck> GameDecks => Set<GameDeck>();
 
     public DbSet<GamePoll> GamePolls => Set<GamePoll>();
+    
+    public DbSet<Card> Cards => Set<Card>();
     
     protected override void OnModelCreating(ModelBuilder builder)
     {

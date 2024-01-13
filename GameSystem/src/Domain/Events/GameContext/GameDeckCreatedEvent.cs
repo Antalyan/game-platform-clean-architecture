@@ -1,6 +1,8 @@
-﻿namespace GameSystem.Domain.Events.Game.Rules;
+﻿using GameSystem.Domain.Entities.GameContext;
 
-public class GameDeckCreatedEvent
+namespace GameSystem.Domain.Events.GameContext;
+
+public class GameDeckCreatedEvent(GameDeck deck) : BaseEvent
 {
-    
+    public GameDeck Deck { get; } = deck;
 }

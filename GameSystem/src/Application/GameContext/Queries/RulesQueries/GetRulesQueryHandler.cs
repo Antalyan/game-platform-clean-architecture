@@ -1,7 +1,6 @@
 ﻿using GameSystem.Application.Common.Interfaces;
-using GameSystem.Application.Game.Queries.GetRules;
 
-namespace GameSystem.Application.GameContext.Queries.Rules;
+namespace GameSystem.Application.GameContext.Queries.RulesQueries;
 
 public class GetRulesQueryHandler : IRequestHandler<GetRulesByIdQuery, RulesDto?>
 {

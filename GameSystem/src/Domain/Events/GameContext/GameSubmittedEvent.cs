@@ -1,4 +1,4 @@
-﻿namespace GameSystem.Domain.Events.Game.Rules;
+﻿namespace GameSystem.Domain.Events.GameContext;
 
 public class GameSubmittedEvent
 {

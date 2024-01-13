@@ -1,6 +1,6 @@
-﻿namespace GameSystem.Domain.Events.Game.Rules;
+﻿namespace GameSystem.Domain.Events.GameContext;
 
-public class RulesCreatedEvent(Entities.Rules rule) : BaseEvent
+public class RulesCreatedEvent(Entities.GameContext.Rules rule) : BaseEvent
 {
-    public Entities.Rules Rules { get; } = rule;
+    public Entities.GameContext.Rules Rules { get; } = rule;
 }

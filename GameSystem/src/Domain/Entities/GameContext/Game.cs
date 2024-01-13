@@ -1,6 +1,6 @@
-﻿namespace GameSystem.Domain.Entities;
+﻿namespace GameSystem.Domain.Entities.GameContext;
 
-public class Game
+public class Game: BaseAuditableEntity
 {
     
 }

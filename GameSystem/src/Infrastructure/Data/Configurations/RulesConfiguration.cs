@@ -1,4 +1,5 @@
 ﻿using GameSystem.Domain.Entities;
+using GameSystem.Domain.Entities.GameContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

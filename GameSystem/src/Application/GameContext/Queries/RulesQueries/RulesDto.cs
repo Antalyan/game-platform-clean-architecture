@@ -1,7 +1,7 @@
-﻿using GameSystem.Domain.Entities;
+﻿using GameSystem.Domain.Entities.GameContext;
 using GameSystem.Domain.Enums;
 
-namespace GameSystem.Application.Game.Queries.GetRules;
+namespace GameSystem.Application.GameContext.Queries.RulesQueries;
 
 public class RulesDto
 {
@@ -10,6 +10,8 @@ public class RulesDto
     public int Players { get; init; }
     
     public WinningCondition WinningCondition { get; init; }
+    
+    public GameType GameType { get; init; }
     
     public int CardsDrawnPerTurn { get; init; }
     

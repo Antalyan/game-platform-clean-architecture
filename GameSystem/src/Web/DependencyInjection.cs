@@ -3,12 +3,11 @@ using GameSystem.Application.Common.Interfaces;
 using GameSystem.Infrastructure.Data;
 using GameSystem.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using ZymLabs.NSwag.FluentValidation;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace GameSystem.Web;
 
 public static class DependencyInjection
 {

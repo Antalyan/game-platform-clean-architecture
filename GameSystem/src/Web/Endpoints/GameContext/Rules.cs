@@ -1,8 +1,7 @@
-﻿using GameSystem.Application.Game.Queries.GetRules;
-using GameSystem.Application.GameContext.Commands.Rules;
-using GameSystem.Application.GameContext.Queries.Rules;
+﻿using GameSystem.Application.GameContext.Commands.RulesCommands;
+using GameSystem.Application.GameContext.Queries.RulesQueries;
 
-namespace GameSystem.Web.Endpoints;
+namespace GameSystem.Web.Endpoints.GameContext;
 
 public class Rules : EndpointGroupBase
 {
