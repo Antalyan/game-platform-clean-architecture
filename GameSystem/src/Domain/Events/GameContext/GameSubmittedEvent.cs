@@ -1,6 +1,9 @@
-﻿namespace GameSystem.Domain.Events.GameContext;
+﻿using GameSystem.Domain.Entities.GameContext;
 
-public class GameSubmittedEvent
+namespace GameSystem.Domain.Events.GameContext;
+
+public class GameSubmittedEvent(Game game, IList<string> players) : BaseEvent
 {
-    
+    public Game Game { get; } = game;
+    public IList<string> SharedPlayers { get; } = players;
 }

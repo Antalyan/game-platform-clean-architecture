@@ -754,6 +754,39 @@
         ]
       }
     },
+    "/api/Game/submit": {
+      "post": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "SubmitGame",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitGameCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/GameDeck/create": {
       "post": {
         "tags": [
@@ -1394,6 +1427,52 @@
             "nullable": true
           }
         }
+      },
+      "SubmitGameCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0,
+            "nullable": true
+          },
+          "deckId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rulesId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/Visibility"
+          },
+          "sharedPlayers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Visibility": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Public",
+          "Shared",
+          "Private"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
       },
       "CreateDeckCommand": {
         "type": "object",

@@ -6,3 +6,4 @@ public class CardAddedToDeckEvent(GameDeck deck) : BaseEvent
 {
     public GameDeck Deck { get; } = deck;
 }
+

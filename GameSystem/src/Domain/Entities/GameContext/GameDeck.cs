@@ -7,4 +7,6 @@ public class GameDeck: BaseAuditableEntity
     public GameType GameType { get; init; }
     
     public IList<CardInDeck> CardList { get; set; } = new List<CardInDeck>();
+    
+    public IList<Game> GameList { get; set; } = new List<Game>();
 }
