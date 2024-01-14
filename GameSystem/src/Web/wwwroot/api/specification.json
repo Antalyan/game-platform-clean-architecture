@@ -940,24 +940,12 @@
         ]
       }
     },
-    "/api/GameDeck/addCard/{id}": {
+    "/api/GameDeck/addCard": {
       "post": {
         "tags": [
           "GameDeck"
         ],
         "operationId": "AddCardToDeck",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
         "requestBody": {
           "x-name": "command",
           "content": {
@@ -968,7 +956,7 @@
             }
           },
           "required": true,
-          "x-position": 2
+          "x-position": 1
         },
         "responses": {
           "200": {
@@ -1742,6 +1730,9 @@
       "AddCardToDeckCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "deckId"
+        ],
         "properties": {
           "deckId": {
             "type": "integer",
