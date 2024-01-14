@@ -24,7 +24,6 @@ function auth() {
 
     check(response, {
         'Authentication: status is 200': (r) => r.status === 200,
-        // 'is correct user': (r) => r.json().user === username,
     });
     
     let parsedBody = JSON.parse(response.body);
@@ -97,6 +96,7 @@ function testGame02DeckCreationAndCardAssignment() {
     });
 }
 
+// Uses preseeded data
 function testGame03GameCreationAndDeletion() {
     // Create game
     let urlCommand = urlBase + 'Game/submit';
@@ -106,12 +106,14 @@ function testGame03GameCreationAndDeletion() {
         "rulesId": 2,
         "visibility": "Public",
     };
-    
+
+    // Unsuccessfully create game where deck and rules game types do not match
     let commandResponse = http.post(urlCommand, JSON.stringify(gameData), {headers: headers});
     check(commandResponse, {
         'Test 03 not matching creation is error': (r) => r.status > 400,
     });
-    
+
+    // Create game where deck and rules game types do match
     gameData.rulesId = 1;
     commandResponse = http.post(urlCommand, JSON.stringify(gameData), {headers: headers});
     check(commandResponse, {
@@ -119,12 +121,15 @@ function testGame03GameCreationAndDeletion() {
     });
     const insertedGameId = commandResponse.json();
 
+    // Delete created game
     urlCommand = urlBase + `Game/${insertedGameId}`;
     commandResponse = http.del(urlCommand, null, {headers: headers});
     console.log(commandResponse)
     check(commandResponse, {
         'Test 03 game deletion status is 204': (r) => r.status === 204,
     });
+
+    // Unsuccessfully attempt to delete same game again
     commandResponse = http.del(urlCommand, null, {headers: headers});
     check(commandResponse, {
         'Test 03 repeated deletion is error': (r) => r.status > 400,

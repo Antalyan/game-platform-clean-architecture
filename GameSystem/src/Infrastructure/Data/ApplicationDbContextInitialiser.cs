@@ -97,23 +97,38 @@ public class ApplicationDbContextInitialiser
         {
             _context.Rules.Add(new Rules
             {
-                CardsHandLimit = 1,
-                CardsDrawnInitially = 2,
-                CardsPlayedPerTurn = 3,
-                CardsDrawnPerTurn = 4,
+                Id = 1,
                 WinningCondition = WinningCondition.FullHand,
                 Players = 4,
+                CardsDrawnPerTurn = 4,
+                CardsDrawnInitially = 2,
+                CardsPlayedPerTurn = 3,
+                CardsHandLimit = 1,
+                GameType = 0
+            });
+            _context.Rules.Add(new Rules
+            {
+                Id = 2,
+                WinningCondition = WinningCondition.EmptyHand,
+                Players = 3,
+                CardsDrawnPerTurn = 3,
+                CardsDrawnInitially = 3,
+                CardsPlayedPerTurn = 3,
+                CardsHandLimit = 3,
+                GameType = GameType.Uno
             });
         }
         
         if (!_context.Cards.Any())
         {
-            var numbers = Enumerable.Range(1, 10).Select(val => val.ToString()).ToList();
-            numbers.AddRange(new List<string>{"Q", "K", "J", "A"});
-            foreach (var name in numbers)
+            var cardNames = Enumerable.Range(1, 10).Select(val => val.ToString()).ToList();
+            cardNames.AddRange(new List<string>{"Q", "K", "J", "A"});
+            for (int i = 0; i < cardNames.Count; i++)
             {
+                var name = cardNames[i];
                 _context.Cards.Add(new CardData
                 {
+                    Id = i + 1,
                     Name = $"{name}",
                     Text = "Common card",
                     GameType = GameType.MauMau
@@ -132,7 +147,17 @@ public class ApplicationDbContextInitialiser
                 GameType = GameType.SimpleBang
             });
         }
-        
+
+        if (!_context.GameDecks.Any())
+        {
+            _context.GameDecks.Add(new GameDeck
+            {
+                Id = 3,
+                Name = "Let it rain",
+                GameType = 0
+            });
+        }
+
         if (!_context.TodoLists.Any())
         {
             _context.TodoLists.Add(new TodoList
