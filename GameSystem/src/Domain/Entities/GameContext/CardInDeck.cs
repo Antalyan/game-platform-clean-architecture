@@ -2,5 +2,7 @@
 
 public class CardInDeck: BaseAuditableEntity
 {
-    public int Quantity { get; init; }
+    public int CardId { get; set; }
+    public int GameDeckId { get; set; }
+    public int Quantity { get; set; }
 }

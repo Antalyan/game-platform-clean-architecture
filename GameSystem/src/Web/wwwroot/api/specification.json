@@ -6,79 +6,6 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Rules": {
-      "get": {
-        "tags": [
-          "Rules"
-        ],
-        "operationId": "GetRules",
-        "parameters": [
-          {
-            "name": "RulesId",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RulesDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Rules"
-        ],
-        "operationId": "CreateRules",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateRulesCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
     "/api/TodoItems": {
       "get": {
         "tags": [
@@ -826,84 +753,153 @@
           }
         ]
       }
+    },
+    "/api/GameDeck/create": {
+      "post": {
+        "tags": [
+          "GameDeck"
+        ],
+        "operationId": "CreateDeck",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDeckCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GameDeck/addCard/{id}": {
+      "post": {
+        "tags": [
+          "GameDeck"
+        ],
+        "operationId": "AddCardToDeck",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCardToDeckCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Rules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "GetRules",
+        "parameters": [
+          {
+            "name": "RulesId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RulesDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "CreateRules",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRulesCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
     }
   },
   "components": {
     "schemas": {
-      "RulesDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "players": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "winningCondition": {
-            "$ref": "#/components/schemas/WinningCondition"
-          },
-          "cardsDrawnPerTurn": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cardsDrawnInitially": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cardsPlayedPerTurn": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cardsHandLimit": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "WinningCondition": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "EmptyHand",
-          "FullHand"
-        ],
-        "enum": [
-          0,
-          1
-        ]
-      },
-      "CreateRulesCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "players": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "winningCondition": {
-            "$ref": "#/components/schemas/WinningCondition"
-          },
-          "cardsDrawnPerTurn": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cardsDrawnInitially": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cardsPlayedPerTurn": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cardsHandLimit": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
       "PaginatedListOfTodoItemBriefDto": {
         "type": "object",
         "additionalProperties": false,
@@ -1396,6 +1392,127 @@
           "summary": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "CreateDeckCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameType": {
+            "$ref": "#/components/schemas/GameType"
+          }
+        }
+      },
+      "GameType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "MauMau",
+          "SimpleBang",
+          "Uno"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "AddCardToDeckCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "deckId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RulesDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "players": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winningCondition": {
+            "$ref": "#/components/schemas/WinningCondition"
+          },
+          "gameType": {
+            "$ref": "#/components/schemas/GameType"
+          },
+          "cardsDrawnPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsDrawnInitially": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsPlayedPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsHandLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WinningCondition": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "EmptyHand",
+          "FullHand"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "CreateRulesCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "players": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winningCondition": {
+            "$ref": "#/components/schemas/WinningCondition"
+          },
+          "gameType": {
+            "$ref": "#/components/schemas/GameType"
+          },
+          "cardsDrawnPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsDrawnInitially": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsPlayedPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsHandLimit": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       }

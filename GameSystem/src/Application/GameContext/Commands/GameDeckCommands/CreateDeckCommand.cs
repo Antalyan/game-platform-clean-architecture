@@ -4,7 +4,7 @@ namespace GameSystem.Application.GameContext.Commands.GameDeckCommands;
 
 public class CreateDeckCommand : IRequest<int>
 {
-    public int Name { get; init; }
+    public string? Name { get; init; }
     
     public GameType GameType { get; init; }
 }

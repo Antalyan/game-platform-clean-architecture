@@ -12,7 +12,7 @@ public interface IApplicationDbContext
     
     DbSet<TodoList> TodoLists { get; }
     
-    DbSet<Domain.Entities.GameContext.Game> Games { get; }
+    DbSet<Game> Games { get; }
     DbSet<GameDeck> GameDecks { get; }
     DbSet<GamePoll> GamePolls { get; }
     DbSet<Card> Cards { get; }

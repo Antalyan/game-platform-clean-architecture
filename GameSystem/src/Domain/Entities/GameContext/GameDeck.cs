@@ -2,9 +2,9 @@
 
 public class GameDeck: BaseAuditableEntity
 {
-    public int Name { get; init; }
+    public string? Name { get; init; }
     
     public GameType GameType { get; init; }
     
-    public IList<CardInDeck> List { get; set; } = null!;
+    public IList<CardInDeck> CardList { get; set; } = new List<CardInDeck>();
 }
