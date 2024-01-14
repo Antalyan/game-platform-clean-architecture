@@ -1,6 +1,8 @@
-﻿namespace GameSystem.Domain.Events.GameContext;
+﻿using GameSystem.Domain.Entities.GameContext;
 
-public class GameDeletedEvent
+namespace GameSystem.Domain.Events.GameContext;
+
+public class GameDeletedEvent(Game game) : BaseEvent
 {
-    
+    public Game Game { get; } = game;
 }

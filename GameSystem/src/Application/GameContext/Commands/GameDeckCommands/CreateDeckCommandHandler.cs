@@ -8,19 +8,19 @@ public class CreateDeckCommandHandler(IApplicationDbContext context) : IRequestH
 {
     public async Task<int> Handle(CreateDeckCommand request, CancellationToken cancellationToken)
     {
-        var entity = new GameDeck
+        var deck = new GameDeck
         {
            Name = request.Name,
            GameType = request.GameType
         };
 
-        entity.AddDomainEvent(new GameDeckCreatedEvent(entity));
+        deck.AddDomainEvent(new GameDeckCreatedEvent(deck));
 
-        context.GameDecks.Add(entity);
+        context.GameDecks.Add(deck);
 
         await context.SaveChangesAsync(cancellationToken);
 
-        return entity.Id;
+        return deck.Id;
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using GameSystem.Application.Common.Interfaces;
 using GameSystem.Domain.Entities.GameContext;
+using GameSystem.Domain.Events.GameContext;
 
 namespace GameSystem.Application.GameContext.Commands.GameDeckCommands;
 
@@ -22,12 +23,16 @@ public class AddCardToDeckCommandHandler(IApplicationDbContext context) : IReque
         var cardInList = deck.CardList.FirstOrDefault(card => card.CardData.Id == newCard.Id);
         if (cardInList == null)
         {
-            deck.CardList.Add(new CardInDeck{CardData = newCard, Quantity = 1, GameDeckId = deck.Id});
+            var addedCard = new CardInDeck { CardData = newCard, Quantity = 1, GameDeckId = deck.Id };
+            deck.CardList.Add(addedCard);
+            addedCard.AddDomainEvent(new CardAddedToDeckEvent(addedCard, deck));
         }
         else
         {
             cardInList.Quantity += 1;
+            cardInList.AddDomainEvent(new CardAddedToDeckEvent(cardInList, deck));
         }
+        
         await context.SaveChangesAsync(cancellationToken);
     }
 }

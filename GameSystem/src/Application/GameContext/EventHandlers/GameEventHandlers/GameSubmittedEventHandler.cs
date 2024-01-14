@@ -8,11 +8,14 @@ namespace GameSystem.Application.GameContext.EventHandlers.GameEventHandlers;
 public class GameSubmittedEventHandler(ILogger<GameSubmittedEventHandler> logger, IApplicationDbContext context)
     : INotificationHandler<GameSubmittedEvent>
 {
+    private IList<GamePoll> _updatedPolls = new List<GamePoll>();
+    
     public async Task Handle(GameSubmittedEvent notification, CancellationToken cancellationToken)
     {
         logger.LogInformation("GameSystem Domain Event: {DomainEvent}", notification.GetType().Name);
         
         await AddGameToPolls(notification.Game, notification.SharedPlayers, cancellationToken);
+        notification.Game.AddDomainEvent(new GameAppearedInPollsEvent(notification.Game, _updatedPolls));
         await context.SaveChangesAsync(cancellationToken);
     }
 
@@ -27,12 +30,14 @@ public class GameSubmittedEventHandler(ILogger<GameSubmittedEventHandler> logger
             {
                 poll = new GamePoll { SharedGames = { game }, CreatedBy = player};
                 context.GamePolls.Add(poll);
+                _updatedPolls.Add(poll);
             }
             else
             {
                 if (!poll.SharedGames.Contains(game))
                 {
                     poll.SharedGames.Add(game);
+                    _updatedPolls.Add(poll);
                 }
             }
         }

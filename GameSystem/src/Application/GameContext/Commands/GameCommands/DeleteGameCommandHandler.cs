@@ -1,4 +1,5 @@
 ﻿using GameSystem.Application.Common.Interfaces;
+using GameSystem.Domain.Events.GameContext;
 
 namespace GameSystem.Application.GameContext.Commands.GameCommands;
 
@@ -13,6 +14,8 @@ public class DeleteGameCommandHandler(IApplicationDbContext context) : IRequestH
         Guard.Against.NotFound(request.Id, game);
 
         context.Games.Remove(game);
+        
+        game.AddDomainEvent(new GameDeletedEvent(game));
 
         await context.SaveChangesAsync(cancellationToken);
     }

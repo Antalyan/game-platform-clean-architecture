@@ -7,7 +7,7 @@ public class CreateRulesCommandHandler(IApplicationDbContext context) : IRequest
 {
     public async Task<int> Handle(CreateRulesCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Domain.Entities.GameContext.Rules()
+        var rules = new Domain.Entities.GameContext.Rules()
         {
             Players = request.Players,
             WinningCondition = request.WinningCondition,
@@ -18,12 +18,10 @@ public class CreateRulesCommandHandler(IApplicationDbContext context) : IRequest
             CardsHandLimit = request.CardsHandLimit
         };
 
-        entity.AddDomainEvent(new RulesCreatedEvent(entity));
-
-        context.Rules.Add(entity);
-
+        rules.AddDomainEvent(new RulesCreatedEvent(rules));
+        context.Rules.Add(rules);
         await context.SaveChangesAsync(cancellationToken);
 
-        return entity.Id;
+        return rules.Id;
     }
 }
