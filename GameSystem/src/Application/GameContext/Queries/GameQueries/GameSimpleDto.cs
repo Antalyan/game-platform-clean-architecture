@@ -7,7 +7,7 @@ namespace GameSystem.Application.GameContext.Queries.GameQueries;
 
 public class GameSimpleDto
 {
-    private int Id { get; init; }
+    public int Id { get; init; }
     public string? Name { get; init; }
     public RulesDto Rules { get; init; } = null!;
     

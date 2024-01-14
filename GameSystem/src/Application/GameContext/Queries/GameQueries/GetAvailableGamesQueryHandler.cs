@@ -1,5 +1,6 @@
 ﻿using GameSystem.Application.Common.Interfaces;
 using GameSystem.Application.Common.Mappings;
+using GameSystem.Application.GameContext.Queries.GamePollQueries;
 using GameSystem.Domain.Enums;
 
 namespace GameSystem.Application.GameContext.Queries.GameQueries;
@@ -34,15 +35,25 @@ public class
 
         if (request.Visibility is null or Visibility.Shared)
         {
-            availableGames.AddRange(await _context.GamePolls
+            var gameList = await _context.GamePolls.Include(poll => poll.SharedGames)
+                .ThenInclude(g => g.Rules)
+                .Include(poll => poll.SharedGames)
+                .ThenInclude(g => g.Deck)
+                .AsNoTracking()
                 .Where(poll => poll.CreatedBy == _user.Id)
                 .Select(poll => poll.SharedGames.Where(g => g.Visibility == Visibility.Shared))
-                .ProjectToListAsync<GameSimpleDto>(_mapper.ConfigurationProvider));
+                .FirstOrDefaultAsync(cancellationToken);
+            if (gameList != null)
+            {
+                availableGames.AddRange(
+                    _mapper.Map<List<GameSimpleDto>>(gameList));
+            }
         }
 
         if (request.Visibility is null or Visibility.Private)
         {
-            availableGames.AddRange(await _context.Games.Where(g => g.CreatedBy == _user.Id && g.Visibility == Visibility.Private)
+            availableGames.AddRange(await _context.Games
+                .Where(g => g.CreatedBy == _user.Id && g.Visibility == Visibility.Private)
                 .ProjectToListAsync<GameSimpleDto>(_mapper.ConfigurationProvider));
         }
 
