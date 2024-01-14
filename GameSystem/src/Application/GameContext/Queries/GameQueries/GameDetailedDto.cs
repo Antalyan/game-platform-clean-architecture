@@ -1,4 +1,5 @@
-﻿using GameSystem.Application.GameContext.Queries.GameDeckQueries;
+﻿using System.ComponentModel.DataAnnotations;
+using GameSystem.Application.GameContext.Queries.GameDeckQueries;
 using GameSystem.Application.GameContext.Queries.RulesQueries;
 using GameSystem.Domain.Entities.GameContext;
 using GameSystem.Domain.Enums;
@@ -11,7 +12,9 @@ public class GameDetailedDto
     public string? Name { get; init; }
     public GameDeckDto Deck { get; init; } = null!;
     public RulesDto Rules { get; init; } = null!;
-    public Visibility Visibility { get; init; }
+    
+    [EnumDataType(typeof(Visibility))]
+    public string? Visibility { get; init; }
     
     private class Mapping : Profile
     {

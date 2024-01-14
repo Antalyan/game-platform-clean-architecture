@@ -1,4 +1,5 @@
-﻿using GameSystem.Domain.Entities.GameContext;
+﻿using System.ComponentModel.DataAnnotations;
+using GameSystem.Domain.Entities.GameContext;
 using GameSystem.Domain.Enums;
 
 namespace GameSystem.Application.GameContext.Queries.RulesQueries;
@@ -9,9 +10,11 @@ public class RulesDto
 
     public int Players { get; init; }
     
-    public WinningCondition WinningCondition { get; init; }
+    [EnumDataType(typeof(WinningCondition))]
+    public string? WinningCondition { get; init; }
     
-    public GameType GameType { get; init; }
+    [EnumDataType(typeof(GameType))]
+    public string? GameType { get; init; }
     
     public int CardsDrawnPerTurn { get; init; }
     

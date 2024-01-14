@@ -1584,7 +1584,8 @@
             "$ref": "#/components/schemas/RulesDto"
           },
           "visibility": {
-            "$ref": "#/components/schemas/Visibility"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -1635,10 +1636,12 @@
             "format": "int32"
           },
           "winningCondition": {
-            "$ref": "#/components/schemas/WinningCondition"
+            "type": "string",
+            "nullable": true
           },
           "gameType": {
-            "$ref": "#/components/schemas/GameType"
+            "type": "string",
+            "nullable": true
           },
           "cardsDrawnPerTurn": {
             "type": "integer",
@@ -1658,32 +1661,6 @@
           }
         }
       },
-      "WinningCondition": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "EmptyHand",
-          "FullHand"
-        ],
-        "enum": [
-          0,
-          1
-        ]
-      },
-      "GameType": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "MauMau",
-          "SimpleBang",
-          "Uno"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
       "GameSimpleDto": {
         "type": "object",
         "additionalProperties": false,
@@ -1696,7 +1673,8 @@
             "$ref": "#/components/schemas/RulesDto"
           },
           "visibility": {
-            "$ref": "#/components/schemas/Visibility"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -1712,6 +1690,20 @@
             "$ref": "#/components/schemas/GameType"
           }
         }
+      },
+      "GameType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "MauMau",
+          "SimpleBang",
+          "Uno"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
       },
       "AddCardToDeckCommand": {
         "type": "object",
@@ -1758,6 +1750,18 @@
             "format": "int32"
           }
         }
+      },
+      "WinningCondition": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "EmptyHand",
+          "FullHand"
+        ],
+        "enum": [
+          0,
+          1
+        ]
       }
     },
     "securitySchemes": {

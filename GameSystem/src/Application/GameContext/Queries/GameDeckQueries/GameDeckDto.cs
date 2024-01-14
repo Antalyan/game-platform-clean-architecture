@@ -6,7 +6,7 @@ public class GameDeckDto
 {
     public string? Name { get; init; }
     
-    public IList<CardInDeckDto> CardList { get; set; } = new List<CardInDeckDto>();
+    public IReadOnlyCollection<CardInDeckDto> CardList { get; set; } = new List<CardInDeckDto>();
     
     private class Mapping : Profile
     {
