@@ -4,7 +4,7 @@ public class GetGameByIdQueryValidator : AbstractValidator<GetGameByIdQuery>
 {
     public GetGameByIdQueryValidator()
     {
-        RuleFor(x => x.GetType())
-            .NotEmpty().WithMessage("Rule id is required.");
+        RuleFor(q => q.GameId)
+            .NotEmpty().WithMessage("Game id is required.");
     }
 }
