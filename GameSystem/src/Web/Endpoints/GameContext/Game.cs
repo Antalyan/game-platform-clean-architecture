@@ -10,6 +10,7 @@ public class Game: EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapPost(SubmitGame, "submit")
+            .MapDelete(DeleteGame, "{id}")
             .MapGet(GetGame, "detail")
             .MapGet(GetGames, "available");
     }
@@ -17,6 +18,12 @@ public class Game: EndpointGroupBase
     public static async Task<int> SubmitGame(ISender sender, SubmitGameCommand command)
     {
         return await sender.Send(command);
+    }
+    
+    public async Task<IResult> DeleteGame(ISender sender, int id)
+    {
+        await sender.Send(new DeleteGameCommand(id));
+        return Results.NoContent();
     }
     
     public static async Task<GameDetailedDto?> GetGame(ISender sender, [AsParameters] GetGameByIdQuery byIdQuery)
