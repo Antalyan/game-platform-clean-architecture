@@ -20,9 +20,8 @@ public class SubmitGameCommandValidator : AbstractValidator<SubmitGameCommand>
                 _context.Games
                     .Where(g => g.CreatedBy == user.Id)
                     .AllAsync(g => g.Name != name, cancellationToken))
-            .WithMessage("'{PropertyName}' must be unique for each user.")
-            .WithErrorCode("Unique");
-
+            .WithMessage("'{PropertyName}' must be unique for each user.");
+        
         RuleFor(command => command.Visibility)
             .Must((command, visibility) =>
                 (visibility == Visibility.Shared && command.SharedPlayers.Count > 0)
