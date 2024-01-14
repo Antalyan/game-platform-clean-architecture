@@ -9,7 +9,7 @@ public class GameDeck : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapPost(CreateDeck, "create")
-            .MapPost(AddCardToDeck, "addCard/{id}");
+            .MapPost(AddCardToDeck, "addCard");
     }
     
     public static async Task<int> CreateDeck(ISender sender, CreateDeckCommand command)
@@ -17,9 +17,8 @@ public class GameDeck : EndpointGroupBase
         return await sender.Send(command);
     }
     
-    public static async Task<IResult> AddCardToDeck(ISender sender, int id, AddCardToDeckCommand command)
+    public static async Task<IResult> AddCardToDeck(ISender sender, AddCardToDeckCommand command)
     {
-        if (id != command.DeckId) return Results.BadRequest();
         await sender.Send(command);
         return Results.NoContent();
     }
