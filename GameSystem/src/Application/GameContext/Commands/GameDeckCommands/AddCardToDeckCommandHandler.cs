@@ -7,22 +7,22 @@ public class AddCardToDeckCommandHandler(IApplicationDbContext context) : IReque
 {
     public async Task Handle(AddCardToDeckCommand request, CancellationToken cancellationToken)
     {
-        var deckList = await context.GameDecks
+        var deck = await context.GameDecks
             .Include(deck => deck.CardList)
             .FirstOrDefaultAsync(deck => deck.Id == request.DeckId, cancellationToken);
-        Guard.Against.NotFound(request.DeckId, deckList);
+        Guard.Against.NotFound(request.DeckId, deck);
 
         var newCard = await context.Cards
             .FindAsync([request.CardId], cancellationToken);
         Guard.Against.NotFound(request.CardId, newCard);
         
-        Guard.Against.AgainstExpression(_ => newCard.GameType == deckList.GameType, deckList.GameType,
-            $"Card with game type: {newCard.GameType} cannot be assigned to a game of different type: {deckList.GameType}");
+        Guard.Against.AgainstExpression(_ => newCard.GameType == deck.GameType, deck.GameType,
+            $"Card with game type: {newCard.GameType} cannot be assigned to a game of different type: {deck.GameType}");
 
-        var cardInList = deckList.CardList.FirstOrDefault(card => card.CardId == newCard.Id);
+        var cardInList = deck.CardList.FirstOrDefault(card => card.CardId == newCard.Id);
         if (cardInList == null)
         {
-            deckList.CardList.Add(new CardInDeck{CardId = newCard.Id, Quantity = 1, GameDeckId = deckList.Id});
+            deck.CardList.Add(new CardInDeck{CardId = newCard.Id, Quantity = 1, GameDeckId = deck.Id});
         }
         else
         {
