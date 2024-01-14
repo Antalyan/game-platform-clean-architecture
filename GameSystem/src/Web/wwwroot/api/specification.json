@@ -970,6 +970,43 @@
         ]
       }
     },
+    "/api/GameDeck": {
+      "get": {
+        "tags": [
+          "GameDeck"
+        ],
+        "operationId": "GetGameDeck",
+        "parameters": [
+          {
+            "name": "GameDeckId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDeckDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Rules": {
       "get": {
         "tags": [

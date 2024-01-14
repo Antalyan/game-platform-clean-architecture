@@ -1,4 +1,5 @@
 ﻿using GameSystem.Application.GameContext.Commands.GameDeckCommands;
+using GameSystem.Application.GameContext.Queries.GameDeckQueries;
 
 namespace GameSystem.Web.Endpoints.GameContext;
 
@@ -9,7 +10,8 @@ public class GameDeck : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapPost(CreateDeck, "create")
-            .MapPost(AddCardToDeck, "addCard");
+            .MapPost(AddCardToDeck, "addCard")
+            .MapGet(GetGameDeck);
     }
     
     public static async Task<int> CreateDeck(ISender sender, CreateDeckCommand command)
@@ -21,5 +23,10 @@ public class GameDeck : EndpointGroupBase
     {
         await sender.Send(command);
         return Results.NoContent();
+    }
+    
+    public static async Task<GameDeckDto?> GetGameDeck(ISender sender, [AsParameters] GetGameDeckByIdQuery byIdQuery)
+    {
+        return await sender.Send(byIdQuery);
     }
 }
