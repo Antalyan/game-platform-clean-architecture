@@ -2,12 +2,12 @@
 
 namespace GameSystem.Application.GameContext.Queries.RulesQueries;
 
-public class GetRulesQueryHandler : IRequestHandler<GetRulesByIdQuery, RulesDto?>
+public class GetRulesByIdQueryHandler : IRequestHandler<GetRulesByIdQuery, RulesDto?>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetRulesQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetRulesByIdQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

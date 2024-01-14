@@ -1,9 +1,7 @@
-﻿using GameSystem.Application.GameContext.Queries.RulesQueries;
+﻿namespace GameSystem.Application.GameContext.Queries.GameQueries;
 
-namespace GameSystem.Application.GameContext.Queries.GameQueries;
-
-public class GetGameByIdQuery : IRequest<RulesDto?>
+public class GetGameByIdQuery : IRequest<GameDetailedDto?>
 {
-    public int RulesId { get; init; }
+    public int GameId { get; init; }
 }
 

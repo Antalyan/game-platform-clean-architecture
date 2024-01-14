@@ -112,20 +112,20 @@ public class ApplicationDbContextInitialiser
             numbers.AddRange(new List<string>{"Q", "K", "J", "A"});
             foreach (var name in numbers)
             {
-                _context.Cards.Add(new Card
+                _context.Cards.Add(new CardData
                 {
                     Name = $"{name}",
                     Text = "Common card",
                     GameType = GameType.MauMau
                 });
             }
-            _context.Cards.Add(new Card
+            _context.Cards.Add(new CardData
             {
                 Name = $"Bang",
                 Text = "BANG!",
                 GameType = GameType.SimpleBang
             });
-            _context.Cards.Add(new Card
+            _context.Cards.Add(new CardData
             {
                 Name = $"Miss",
                 Text = "Play to avoid bang effect",

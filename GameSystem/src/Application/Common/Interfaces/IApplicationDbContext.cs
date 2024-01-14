@@ -15,7 +15,7 @@ public interface IApplicationDbContext
     DbSet<Game> Games { get; }
     DbSet<GameDeck> GameDecks { get; }
     DbSet<GamePoll> GamePolls { get; }
-    DbSet<Card> Cards { get; }
+    DbSet<CardData> Cards { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

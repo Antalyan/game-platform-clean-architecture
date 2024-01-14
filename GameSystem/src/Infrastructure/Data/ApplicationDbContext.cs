@@ -25,7 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<GamePoll> GamePolls => Set<GamePoll>();
     
-    public DbSet<Card> Cards => Set<Card>();
+    public DbSet<CardData> Cards => Set<CardData>();
     
     protected override void OnModelCreating(ModelBuilder builder)
     {

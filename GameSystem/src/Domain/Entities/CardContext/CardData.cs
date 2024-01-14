@@ -1,6 +1,6 @@
 ﻿namespace GameSystem.Domain.Entities.CardContext;
 
-public class Card: BaseAuditableEntity
+public class CardData: BaseAuditableEntity
 {
     public string? Name { get; init; }
     

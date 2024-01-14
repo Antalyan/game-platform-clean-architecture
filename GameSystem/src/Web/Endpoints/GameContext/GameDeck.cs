@@ -7,7 +7,7 @@ public class GameDeck : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            // .RequireAuthorization()
+            .RequireAuthorization()
             .MapPost(CreateDeck, "create")
             .MapPost(AddCardToDeck, "addCard/{id}");
     }

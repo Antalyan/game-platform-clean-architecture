@@ -784,7 +784,92 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Game/detail": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "GetGame",
+        "parameters": [
+          {
+            "name": "GameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDetailedDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Game/available": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "GetGames",
+        "parameters": [
+          {
+            "name": "Visibility",
+            "in": "query",
+            "schema": {
+              "nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Visibility"
+                }
+              ]
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameSimpleDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/GameDeck/create": {
@@ -817,7 +902,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/GameDeck/addCard/{id}": {
@@ -854,7 +944,12 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Rules": {
@@ -1474,7 +1569,7 @@
           2
         ]
       },
-      "CreateDeckCommand": {
+      "GameDetailedDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -1482,34 +1577,46 @@
             "type": "string",
             "nullable": true
           },
-          "gameType": {
-            "$ref": "#/components/schemas/GameType"
+          "deck": {
+            "$ref": "#/components/schemas/GameDeckDto"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/RulesDto"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/Visibility"
           }
         }
       },
-      "GameType": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "MauMau",
-          "SimpleBang",
-          "Uno"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "AddCardToDeckCommand": {
+      "GameDeckDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "deckId": {
-            "type": "integer",
-            "format": "int32"
+          "name": {
+            "type": "string",
+            "nullable": true
           },
-          "cardId": {
+          "cardList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardInDeckDto"
+            }
+          }
+        }
+      },
+      "CardInDeckDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
             "type": "integer",
             "format": "int32"
           }
@@ -1562,6 +1669,63 @@
           0,
           1
         ]
+      },
+      "GameType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "MauMau",
+          "SimpleBang",
+          "Uno"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "GameSimpleDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "rules": {
+            "$ref": "#/components/schemas/RulesDto"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/Visibility"
+          }
+        }
+      },
+      "CreateDeckCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameType": {
+            "$ref": "#/components/schemas/GameType"
+          }
+        }
+      },
+      "AddCardToDeckCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "deckId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "CreateRulesCommand": {
         "type": "object",

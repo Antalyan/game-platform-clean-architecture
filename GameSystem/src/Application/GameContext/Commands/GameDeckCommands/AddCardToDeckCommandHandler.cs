@@ -19,10 +19,10 @@ public class AddCardToDeckCommandHandler(IApplicationDbContext context) : IReque
         Guard.Against.AgainstExpression(_ => newCard.GameType == deck.GameType, deck.GameType,
             $"Card with game type: {newCard.GameType} cannot be assigned to a game of different type: {deck.GameType}");
 
-        var cardInList = deck.CardList.FirstOrDefault(card => card.CardId == newCard.Id);
+        var cardInList = deck.CardList.FirstOrDefault(card => card.CardData.Id == newCard.Id);
         if (cardInList == null)
         {
-            deck.CardList.Add(new CardInDeck{CardId = newCard.Id, Quantity = 1, GameDeckId = deck.Id});
+            deck.CardList.Add(new CardInDeck{CardData = newCard, Quantity = 1, GameDeckId = deck.Id});
         }
         else
         {

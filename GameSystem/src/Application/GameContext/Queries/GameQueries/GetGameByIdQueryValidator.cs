@@ -1,12 +1,10 @@
-﻿using GameSystem.Application.GameContext.Queries.RulesQueries;
+﻿namespace GameSystem.Application.GameContext.Queries.GameQueries;
 
-namespace GameSystem.Application.GameContext.Queries.GameQueries;
-
-public class GetGameByIdQueryValidator : AbstractValidator<GetRulesByIdQuery>
+public class GetGameByIdQueryValidator : AbstractValidator<GetGameByIdQuery>
 {
     public GetGameByIdQueryValidator()
     {
-        RuleFor(x => x.RulesId)
+        RuleFor(x => x.GetType())
             .NotEmpty().WithMessage("Rule id is required.");
     }
 }
