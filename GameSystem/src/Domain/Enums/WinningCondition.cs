@@ -2,6 +2,6 @@
 
 public enum WinningCondition
 {
-    EmptyHand = 0,
-    FullHand = 1,
+    EmptyHand,
+    FullHand,
 }

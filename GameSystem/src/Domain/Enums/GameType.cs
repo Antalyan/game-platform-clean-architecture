@@ -2,7 +2,7 @@
 
 public enum GameType
 {
-    MauMau = 0, // Prší in Czech
-    SimpleBang = 1,
-    Uno = 2
+    MauMau, // Prší in Czech
+    SimpleBang,
+    Uno
 }

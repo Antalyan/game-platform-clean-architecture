@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using GameSystem.Application;
 using GameSystem.Infrastructure;
 using GameSystem.Infrastructure.Data;
@@ -11,6 +12,7 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
+builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 var app = builder.Build();
 
