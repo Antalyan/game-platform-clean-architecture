@@ -35,6 +35,17 @@ cd .\tests
 k6 run TestName
 ```
 
+## Authentication during testing
+
+1. Go to API web page and send a request to Users/login endpoint with email and password. 
+    You can either create a new one using Users/register endpoint or use a preseeded user.
+2. Copy obtained token and click on Authorize in the upper right corner 
+3. Fill in the token field:
+```
+Bearer <TokenString>
+```
+4. You should be authenticated now with access to endpoints. From time to time, the token must be refreshed.
+
 ## Entity Framework
 To create a migration (creates a snapshot of db schema changes made in code):
 ```bash
