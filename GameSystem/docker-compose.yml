@@ -4,7 +4,7 @@ networks:
   myAppNetwork: 
     
 services:
-  GameSystemDB:
+  GS-DB:
     container_name: GS-DB-container
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
@@ -21,5 +21,6 @@ services:
       
       context: .
       dockerfile: Dockerfile
+      
     depends_on:
-      - GameSystemDB
+      - GS-DB

@@ -17,8 +17,9 @@ dotnet watch run
 To run this app in docker, you must go to GameSystem folder and follow these steps
 
 ```bash
- docker build -f .\Dockerfile -t pv293 .
- docker run -d -p 8080:80 pv293
+ docker compose up GS-DB 
+ dotnet ef database update --project src\Infrastructure --startup-project src\Web  
+ docker compose up WebApi
 ```
 This will run web app on port 80 accessible through http protocol
 
