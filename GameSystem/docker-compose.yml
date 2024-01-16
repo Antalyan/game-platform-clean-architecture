@@ -1,0 +1,25 @@
+version: '3.4'
+
+networks:
+  myAppNetwork: 
+    
+services:
+  GameSystemDB:
+    container_name: GS-DB-container
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourPassword123!
+  WebApi:
+    image: pv293
+    container_name: WebApiContainer
+    ports:
+      - 80:8080
+    build:
+      
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - GameSystemDB

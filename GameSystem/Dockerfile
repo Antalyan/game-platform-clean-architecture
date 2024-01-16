@@ -31,4 +31,5 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 RUN ls -l
+
 ENTRYPOINT [ "dotnet", "GameSystem.Web.dll", "--server.urls", "http://+:8080" ]
