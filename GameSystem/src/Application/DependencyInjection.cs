@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using GameSystem.Application.Common.Behaviours;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace GameSystem.Application;
 
 public static class DependencyInjection
 {

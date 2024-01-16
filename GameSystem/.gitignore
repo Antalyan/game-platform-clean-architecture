@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 # Github files
 .github
+
+# 
+src/Infrastructure/Data/Migrations

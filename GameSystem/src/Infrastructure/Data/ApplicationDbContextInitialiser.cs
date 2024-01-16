@@ -1,6 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 using GameSystem.Domain.Constants;
 using GameSystem.Domain.Entities;
+using GameSystem.Domain.Entities.CardContext;
+using GameSystem.Domain.Entities.GameContext;
+using GameSystem.Domain.Enums;
 using GameSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -86,9 +89,75 @@ public class ApplicationDbContextInitialiser
                 await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
             }
         }
-
+        
         // Default data
         // Seed, if necessary
+
+        if (!_context.Rules.Any())
+        {
+            _context.Rules.Add(new Rules
+            {
+                Id = 1,
+                WinningCondition = WinningCondition.FullHand,
+                Players = 4,
+                CardsDrawnPerTurn = 4,
+                CardsDrawnInitially = 2,
+                CardsPlayedPerTurn = 3,
+                CardsHandLimit = 1,
+                GameType = 0
+            });
+            _context.Rules.Add(new Rules
+            {
+                Id = 2,
+                WinningCondition = WinningCondition.EmptyHand,
+                Players = 3,
+                CardsDrawnPerTurn = 3,
+                CardsDrawnInitially = 3,
+                CardsPlayedPerTurn = 3,
+                CardsHandLimit = 3,
+                GameType = GameType.Uno
+            });
+        }
+        
+        if (!_context.Cards.Any())
+        {
+            var cardNames = Enumerable.Range(1, 10).Select(val => val.ToString()).ToList();
+            cardNames.AddRange(new List<string>{"Q", "K", "J", "A"});
+            for (int i = 0; i < cardNames.Count; i++)
+            {
+                var name = cardNames[i];
+                _context.Cards.Add(new CardData
+                {
+                    Id = i + 1,
+                    Name = $"{name}",
+                    Text = "Common card",
+                    GameType = GameType.MauMau
+                });
+            }
+            _context.Cards.Add(new CardData
+            {
+                Name = $"Bang",
+                Text = "BANG!",
+                GameType = GameType.SimpleBang
+            });
+            _context.Cards.Add(new CardData
+            {
+                Name = $"Miss",
+                Text = "Play to avoid bang effect",
+                GameType = GameType.SimpleBang
+            });
+        }
+
+        if (!_context.GameDecks.Any())
+        {
+            _context.GameDecks.Add(new GameDeck
+            {
+                Id = 3,
+                Name = "Let it rain",
+                GameType = 0
+            });
+        }
+
         if (!_context.TodoLists.Any())
         {
             _context.TodoLists.Add(new TodoList

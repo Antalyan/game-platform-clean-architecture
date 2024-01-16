@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using GameSystem.Application.Common.Interfaces;
 using GameSystem.Infrastructure.Data;
+using GameSystem.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
