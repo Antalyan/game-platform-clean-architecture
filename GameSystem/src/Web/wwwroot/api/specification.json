@@ -1,5 +1,5 @@
 {
-  "x-generator": "NSwag v14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v14.0.1.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
   "openapi": "3.0.0",
   "info": {
     "title": "GameSystem API",
@@ -753,6 +753,332 @@
           }
         ]
       }
+    },
+    "/api/Game/submit": {
+      "post": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "SubmitGame",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitGameCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Game/{id}": {
+      "delete": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "DeleteGame",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Game/detail": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "GetGame",
+        "parameters": [
+          {
+            "name": "GameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDetailedDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Game/available": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "operationId": "GetGames",
+        "parameters": [
+          {
+            "name": "Visibility",
+            "in": "query",
+            "schema": {
+              "nullable": true,
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Visibility"
+                }
+              ]
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameSimpleDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/GameDeck/create": {
+      "post": {
+        "tags": [
+          "GameDeck"
+        ],
+        "operationId": "CreateDeck",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDeckCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/GameDeck/addCard": {
+      "post": {
+        "tags": [
+          "GameDeck"
+        ],
+        "operationId": "AddCardToDeck",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCardToDeckCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/GameDeck": {
+      "get": {
+        "tags": [
+          "GameDeck"
+        ],
+        "operationId": "GetGameDeck",
+        "parameters": [
+          {
+            "name": "GameDeckId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDeckDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Rules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "GetRules",
+        "parameters": [
+          {
+            "name": "RulesId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RulesDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "CreateRules",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRulesCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1251,6 +1577,253 @@
             "nullable": true
           }
         }
+      },
+      "SubmitGameCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0,
+            "nullable": true
+          },
+          "deckId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rulesId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/Visibility"
+          },
+          "sharedPlayers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Visibility": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Public",
+          "Shared",
+          "Private"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "GameDetailedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "deck": {
+            "$ref": "#/components/schemas/GameDeckDto"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/RulesDto"
+          },
+          "visibility": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GameDeckDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardInDeckDto"
+            }
+          }
+        }
+      },
+      "CardInDeckDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RulesDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "players": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winningCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameType": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardsDrawnPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsDrawnInitially": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsPlayedPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsHandLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GameSimpleDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "rules": {
+            "$ref": "#/components/schemas/RulesDto"
+          },
+          "visibility": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateDeckCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameType": {
+            "$ref": "#/components/schemas/GameType"
+          }
+        }
+      },
+      "GameType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "MauMau",
+          "SimpleBang",
+          "Uno"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "AddCardToDeckCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "deckId"
+        ],
+        "properties": {
+          "deckId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateRulesCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "players": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winningCondition": {
+            "$ref": "#/components/schemas/WinningCondition"
+          },
+          "gameType": {
+            "$ref": "#/components/schemas/GameType"
+          },
+          "cardsDrawnPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsDrawnInitially": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsPlayedPerTurn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardsHandLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WinningCondition": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "EmptyHand",
+          "FullHand"
+        ],
+        "enum": [
+          0,
+          1
+        ]
       }
     },
     "securitySchemes": {
