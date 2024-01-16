@@ -17,7 +17,7 @@ dotnet watch run
 To run this app in docker, you must go to GameSystem folder and follow these steps
 
 ```bash
- docker compose up GS-DB 
+ docker compose up GS-DB -d
  dotnet ef database update --project src\Infrastructure --startup-project src\Web  
  docker compose up WebApi
 ```
