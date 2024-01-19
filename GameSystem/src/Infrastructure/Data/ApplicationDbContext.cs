@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<TodoList> TodoLists => Set<TodoList>();
 
+    
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     
     public DbSet<Rules> Rules => Set<Rules>();
@@ -30,7 +31,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+        
         base.OnModelCreating(builder);
     }
 }
