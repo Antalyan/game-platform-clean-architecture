@@ -10,5 +10,5 @@ public class Tournament: BaseAuditableEntity
     
     public IList<PlayerInTournament> PlayerList { get; set; } = new List<PlayerInTournament>();
     public IList<Game> GameList { get; set; } = new List<Game>();
-    
+    public IList<TournamentNotification> TournamentNotifications { get; set; } = new List<TournamentNotification>();
 }

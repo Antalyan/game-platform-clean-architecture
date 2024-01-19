@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TournamentContext\Commands\TournamentNotificationCommands\" />
+    <Folder Include="TournamentContext\EventHandlers\" />
+    <Folder Include="TournamentContext\Queries\" />
+  </ItemGroup>
+
 </Project>

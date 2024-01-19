@@ -1,6 +1,8 @@
 ﻿using GameSystem.Domain.Entities;
 using GameSystem.Domain.Entities.CardContext;
 using GameSystem.Domain.Entities.GameContext;
+using GameSystem.Domain.Entities.PlayerContext;
+using GameSystem.Domain.Entities.TournamentContext;
 
 namespace GameSystem.Application.Common.Interfaces;
 
@@ -16,6 +18,10 @@ public interface IApplicationDbContext
     DbSet<GameDeck> GameDecks { get; }
     DbSet<GamePoll> GamePolls { get; }
     DbSet<CardData> Cards { get; }
+    
+    DbSet<Tournament> Tournaments { get; }
+    DbSet<TournamentNotification> Notifications { get; }
+    DbSet<Player> Players { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
