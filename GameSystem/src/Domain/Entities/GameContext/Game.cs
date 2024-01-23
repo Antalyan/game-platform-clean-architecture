@@ -6,4 +6,5 @@ public class Game: BaseAuditableEntity
     public GameDeck Deck { get; set; } = null!;
     public Rules Rules { get; set; } = null!;
     public Visibility Visibility { get; set; }
+    public int? TournamentId { get; set; }
 }

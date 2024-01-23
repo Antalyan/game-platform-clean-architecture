@@ -3,6 +3,8 @@ using GameSystem.Domain.Constants;
 using GameSystem.Domain.Entities;
 using GameSystem.Domain.Entities.CardContext;
 using GameSystem.Domain.Entities.GameContext;
+using GameSystem.Domain.Entities.PlayerContext;
+using GameSystem.Domain.Entities.TournamentContext;
 using GameSystem.Domain.Enums;
 using GameSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -156,6 +158,25 @@ public class ApplicationDbContextInitialiser
                 Name = "Let it rain",
                 GameType = 0
             });
+            
+        }
+        
+        if (!_context.Players.Any())
+        {
+            _context.Players.Add(new Player()
+            {
+                Id = 1,
+                Name="Josh",
+                EmailAddress = "josh@gmail.com",
+                
+            });
+            
+            _context.Players.Add(new Player
+            {
+                Id = 2,
+                Name="Tony",
+                EmailAddress = "tony@gmail.com"
+            });
         }
 
         if (!_context.TodoLists.Any())
@@ -174,5 +195,7 @@ public class ApplicationDbContextInitialiser
 
             await _context.SaveChangesAsync();
         }
+        
+        
     }
 }

@@ -18,6 +18,7 @@ public class GameSubmittedEventHandler(ILogger<GameSubmittedEventHandler> logger
         notification.Game.AddDomainEvent(new GameAppearedInPollsEvent(notification.Game, _updatedPolls));
         await context.SaveChangesAsync(cancellationToken);
     }
+    
 
     private async Task AddGameToPolls(Game game, IList<string> players, CancellationToken cancellationToken)
     {
