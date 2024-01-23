@@ -22,6 +22,7 @@ public interface IApplicationDbContext
     DbSet<Tournament> Tournaments { get; }
     DbSet<TournamentNotification> Notifications { get; }
     DbSet<Player> Players { get; }
+    DbSet<PlayerInTournament> PlayerInTournaments { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

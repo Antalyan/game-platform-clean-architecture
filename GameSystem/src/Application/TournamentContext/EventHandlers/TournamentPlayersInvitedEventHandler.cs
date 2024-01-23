@@ -1,3 +1,5 @@
+using GameSystem.Domain.Entities.PlayerContext;
+using GameSystem.Domain.Entities.TournamentContext;
 using GameSystem.Domain.Events.TournamentContext;
 
 namespace GameSystem.Application.TournamentContext.EventHandlers;
@@ -11,38 +13,37 @@ public class TournamentPlayersInvitedEventHandler(ILogger<TournamentPlayersInvit
         IApplicationDbContext context)
     : INotificationHandler<TournamentPlayersInvitedEvent>
 {
-    private IList<GamePoll> _updatedPolls = new List<GamePoll>();
 
-    public async Task Handle(TournamentPlayersInvitedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(TournamentPlayersInvitedEvent eventTournamentPlayersInvitedEvent, CancellationToken cancellationToken)
     {
-        logger.LogInformation("GameSystem Domain Event: {DomainEvent}", notification.GetType().Name);
-        //
-        // await AddGameToPolls(notification.Game, notification.SharedPlayers, cancellationToken);
-        // notification.Game.AddDomainEvent(new GameAppearedInPollsEvent(notification.Game, _updatedPolls));
+        
+        logger.LogInformation("Invite free open players");
+        var players = context.Players.Where(player => player.IsOpenToTournament).ToList();
+        var tournament = eventTournamentPlayersInvitedEvent.Tournament;
+        context.Notifications.AddRange(await CreateNotifications(tournament, players, cancellationToken));
+        eventTournamentPlayersInvitedEvent.Tournament.AddDomainEvent(new UserNotifiedEvent(players,tournament));
+        logger.LogInformation("Notification sent");
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    private async Task AddGameToPolls(Game game, IList<string> players, CancellationToken cancellationToken)
+    private async Task<IList<TournamentNotification>> CreateNotifications(Tournament tournament, IList<Player> players, CancellationToken cancellationToken)
     {
+        IList<TournamentNotification> notifications = new List<TournamentNotification>();
         foreach (var player in players)
         {
-            var poll = await context.GamePolls
-                .Include(poll => poll.SharedGames)
-                .FirstOrDefaultAsync(poll => poll.CreatedBy == game.CreatedBy, cancellationToken);
-            if (poll == null)
+            var inviteText = $"Hi {player.Name}, I 'd like to invite you to {tournament.Name}";
+            var notification = new TournamentNotification
             {
-                poll = new GamePoll { SharedGames = { game }, CreatedBy = player };
-                context.GamePolls.Add(poll);
-                _updatedPolls.Add(poll);
-            }
-            else
-            {
-                if (!poll.SharedGames.Contains(game))
-                {
-                    poll.SharedGames.Add(game);
-                    _updatedPolls.Add(poll);
-                }
-            }
+                InviteText = inviteText,
+                PlayerId = player.Id,
+                TournamentId = tournament.Id,
+                IsAccepted = false
+            };
+            notifications.Add(notification);
+            
         }
+        await context.SaveChangesAsync(cancellationToken);
+        return notifications;
+
     }
 }

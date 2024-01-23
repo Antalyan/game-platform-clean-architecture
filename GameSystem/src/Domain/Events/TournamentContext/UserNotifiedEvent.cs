@@ -3,8 +3,8 @@ using GameSystem.Domain.Entities.TournamentContext;
 
 namespace GameSystem.Domain.Events.TournamentContext;
 
-public class UserNotifiedEvent(Player player, Tournament tournament)
+public class UserNotifiedEvent(IList<Player> players, Tournament tournament): BaseEvent
 {
-    public Player Player { get; } = player;
+    public IList<Player> Players { get; } = players;
     public Tournament Tournament { get; } = tournament;
 }

@@ -3,7 +3,7 @@ using GameSystem.Domain.Entities.TournamentContext;
 
 namespace GameSystem.Domain.Events.TournamentContext;
 
-public class TournamentPlayersInvitedEvent(TournamentNotification notification):BaseEvent
+public class TournamentPlayersInvitedEvent(Tournament tournament):BaseEvent
 {
-    public TournamentNotification Notification { get; } = notification;
+    public Tournament Tournament { get; } = tournament;
 }
