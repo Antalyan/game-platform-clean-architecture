@@ -12,6 +12,8 @@ Project documentation contains deployment schema, price estimation for deploymen
 
 Project was created within an optional course PV293: Software architectures at Faculty of Informatics, Masaryk University.
 
+Used technology: C#/.NET, Asp.NET Core Identity, Entity Framework, MediatR
+
 ## Domain description
 
 Design platform that enables players to compete in various online games and tournaments.
